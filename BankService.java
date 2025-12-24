@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BankService {
+
     private Transaction head = null;
     private double balance = 0.0;
     private String getCurrentTime() {
@@ -57,6 +58,46 @@ public class BankService {
             temp = temp.next;
         }
     }
+
+    public void searchByAmount(double targetAmount) {
+        System.out.println("\n--- Transactions with amount: " + targetAmount + " ---");
+        Transaction temp = head;
+        boolean found = false;
+        while (temp != null) {
+            if (temp.getAmount() == targetAmount) {
+                System.out.println("Time     : " + temp.getTime());
+                System.out.println("Sender   : " + temp.getSender());
+                System.out.println("Receiver : " + temp.getReceiver());
+                System.out.println("Amount   : " + temp.getAmount());
+                System.out.println("---------------------------------------------");
+                found = true;
+            }
+            temp = temp.next;
+        }
+        if (!found) {
+            System.out.println("No transactions found for this amount.");
+        }
+    }
+
+    public void showLastTransactions(int n) {
+        System.out.println("\n--- Last " + n + " Transactions ---");
+        Transaction temp = head;
+        int count = 0;
+        if (temp == null) {
+            System.out.println("No transactions available.");
+            return;
+        }
+        while (temp != null && count < n) {
+            System.out.println("Time     : " + temp.getTime());
+            System.out.println("Sender   : " + temp.getSender());
+            System.out.println("Receiver : " + temp.getReceiver());
+            System.out.println("Amount   : " + temp.getAmount());
+            System.out.println("---------------------------------------------");
+            temp = temp.next;
+            count++;
+        }
+    }
+
     public void checkBalance() {
         System.out.println("Current balance: " + balance);
     }

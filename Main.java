@@ -9,9 +9,11 @@ public class Main {
             System.out.println("1. Deposit");
             System.out.println("2. Withdraw");
             System.out.println("3. Transfer");
-            System.out.println("4. View Transactions");
+            System.out.println("4. View All Transactions");
             System.out.println("5. Check Balance");
-            System.out.println("6. Exit");
+            System.out.println("6. Search Transactions by Amount");
+            System.out.println("7. Previous Transactions");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             switch(choice) {
@@ -41,13 +43,23 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.print("Enter amount to search: ");
+                    bank.searchByAmount(sc.nextDouble());
+                    break;
+
+                case 7:
+                    System.out.print("Enter N: ");
+                    bank.showLastTransactions(sc.nextInt());
+                    break;
+
+                case 8:
                     System.out.println("Exiting Banking System...");
                     break;
 
                 default:
                     System.out.println("Invalid choice. Try again.");
             }
-        } while (choice != 6);
+        } while (choice != 8);
         sc.close();
     }
 }
